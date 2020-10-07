@@ -1,5 +1,11 @@
 
-class sala (val numeroDeSala: Int, val poderMaligno: Int, val numeroEnemigos: Int, val numeroFlechas: Int, val tipoPeligro: peligro ) {
+class Sala () {
+    var numeroDeSala: Int = 0
+    var poderMaligno: Int = 0
+    var numeroEnemigos: Int = 0
+    var numeroFlechas: Int = 0
+    var tipoPeligro: peligro = peligro.accion
+
 }
 
 enum class peligro {

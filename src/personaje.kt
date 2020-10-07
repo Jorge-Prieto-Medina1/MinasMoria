@@ -1,6 +1,6 @@
-open class personaje (val nombre: String, var estado: Boolean)
+open class Personaje (val nombre: String, var estado: Boolean)
 
-class mago (nombre: String, estado: Boolean, var energíatotal: Int) : personaje (nombre, estado){
+class Mago (nombre: String, estado: Boolean, var energíatotal: Int) : Personaje (nombre, estado){
     fun recargarVara(energia: Int){
         energíatotal += energia
     }
@@ -9,7 +9,7 @@ class mago (nombre: String, estado: Boolean, var energíatotal: Int) : personaje
     }
 }
 
-class elfo (nombre: String, estado: Boolean, var carcaj: Int) : personaje (nombre, estado){
+class Elfo (nombre: String, estado: Boolean, var carcaj: Int) : Personaje (nombre, estado){
     fun lanzarFlecha(){
         carcaj--
     }
@@ -19,7 +19,9 @@ class elfo (nombre: String, estado: Boolean, var carcaj: Int) : personaje (nombr
     }
 }
 
-class hobbit (nombre: String, estado: Boolean, var anillo: Boolean) : personaje (nombre, estado){
+class Hobbit (nombre: String, estado: Boolean, var anillo: Boolean) : Personaje (nombre, estado){
+
+
     fun ponerseAnillo (){
         anillo = true
     }
