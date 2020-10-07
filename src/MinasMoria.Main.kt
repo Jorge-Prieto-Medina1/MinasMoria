@@ -1,3 +1,6 @@
+import java.io.File
+
 fun main(args: Array<String>) {
-    println("Hola a todos")
+    println("Bienvenido a Minas Moria")
+    File ("")
 }
