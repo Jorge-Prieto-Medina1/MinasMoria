@@ -292,7 +292,6 @@ fun main(args: Array<String>) {
 
 
         }
-        archivo.printWriter().close()
         //ciere del escritor
     }
     //final malo
@@ -309,8 +308,7 @@ fun main(args: Array<String>) {
             out.println("Fecha de finalización: "+fechafinal)
 
         }
-        archivo.printWriter().close()
-        //ciere del escritor
+
     }
 
 

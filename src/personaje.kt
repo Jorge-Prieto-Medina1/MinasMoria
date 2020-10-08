@@ -20,7 +20,6 @@ class Elfo (nombre: String, estado: Boolean, var carcaj: Int) : Personaje (nombr
     }
     fun recargarCarcaj(flechas: Int){
         carcaj+=flechas
-
     }
 }
 //La clase Hobbit cuenta con el boolean anillo que cuando es true representa que el anillo está puesto
