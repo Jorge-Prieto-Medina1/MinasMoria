@@ -1,4 +1,4 @@
-Ronda de minas moria perdida
-Salas superadas: 1
-Fecha de inicio: 2020-10-08T03:05:38.709741900
-Fecha de finalización: 2020-10-08T03:05:43.231408500
+Ronda de minas moria ganada
+Salas superadas: 36
+Fecha de inicio: 2020-10-08T04:16:23.930952
+Fecha de finalización: 2020-10-08T04:16:49.324946100
