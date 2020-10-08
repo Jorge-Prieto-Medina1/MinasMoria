@@ -2,29 +2,43 @@ import java.io.File
 import java.lang.Exception
 import java.util.*
 import java.time.LocalDateTime
-
+//imports de clases de java necesarias
 
 // Creado por Jorge Prieto Medina
 fun main(args: Array<String>) {
+    //declaración de las variables que serán usadas durante la ejecución del programa
     val archivo = File("moria.txt")
+    //la constante archivo contiene el nombre del archivo en el que se escribe la información
     var numaleatorio = Random()
+    //la variable numaleatorio (salía error al poner numAleatorio por eso hay variables con ambas palabras
+    //escritas en minusculas) se encarga de generar los numeros aleatorios
     var enemigos: Int = 0
     var probabilidad: Int = 0
     var salas = Array(36) {Sala()}
+    //la variable salas es una lista de arrays de objetos de la clase sala
     var numSalas: Int = 0
     var flechas: Int = 0
     var energia: Int = 0
+    //las variables flechas, energía son las que reciben un valor cuando
+    //el numero de flechas o energía cambia
     var salaSuperada: Boolean = false
+    // Boolean que se usa para comprobar si la sala ha sido superada
+    // solo se usa en la sala mágica y en la maligna pues son las unicas
+    // cuyo indice de victoria se calcula con numeros random
     var numpeligro: Int = 0
+    //declaración de los personajes
     var hobbit = Hobbit (nombre = "Frodo", estado = true, anillo = false)
     var elfo = Elfo (nombre = "Légolas", estado = true, carcaj = 0)
     var mago = Mago (nombre = "Gándalf", estado = true, energíatotal = 0)
 
+    //comprobación de la existencia del archivo de texto
+    //si no existe se crea
     if (!archivo.exists()){
         archivo.createNewFile()
     }
 
     println("Bienvenido a Minas Moria")
+    //metodos para rellenar la vara y el carcaj con try catch para no producirse errores
     do {
         try {
             println("Añada la energía inicial de la Vara de Gandalf")
@@ -51,14 +65,16 @@ fun main(args: Array<String>) {
 
 
 
-
+    //inicio de la simulación
     println("Comenzando simulación")
+    //la constante fechainicial guarda la fecha en la que se inicia la simulación
     val fechainicial = LocalDateTime.now()
     do{
         print("Bienvenido a la sala numero: ")
         println(numSalas+1)
 
         do {
+            //codigo con el que se pregunta al jugador el poder maligno de la sala
             try {
                 println("Elige el numero del poder maligno de la sala")
                 println("Del numero 1 al 3 el peligro será de acción")
@@ -71,6 +87,7 @@ fun main(args: Array<String>) {
             }
         }while (numpeligro > 10 || numpeligro < 1)
         salas[numSalas].poderMaligno=numpeligro
+        //sala de acción
         if(salas[numSalas].poderMaligno <= 3){
             salas[numSalas].tipoPeligro=peligro.accion
             println("Esta sala es de acción")
@@ -120,11 +137,10 @@ fun main(args: Array<String>) {
 
             }
 
-
             numSalas++;
 
 
-
+        //sala de mágica
         } else if (salas[numSalas].poderMaligno >= 4 && salas[numSalas].poderMaligno <= 7){
             salas[numSalas].tipoPeligro=peligro.magico
             println("Esta sala es de Mágica")
@@ -205,7 +221,7 @@ fun main(args: Array<String>) {
 
 
 
-
+        //sala maligna
         else{
             salas[numSalas].tipoPeligro=peligro.maligno
 
@@ -256,15 +272,18 @@ fun main(args: Array<String>) {
 
         }
 
-
+    //comprobador que asegura que todos los personajes estan vivios y que no se han recorrido las 36 salas
     }while(hobbit.estado && elfo.estado && mago.estado && numSalas < 36)
 
+    //constante que recoge la fecha final
     val fechafinal = LocalDateTime.now()
 
+    //final ganador
     if(hobbit.estado && elfo.estado && mago.estado){
         print("Felicidades ha conseguido superar las minas de Moria ha ganado superando un total de ")
         print(numSalas)
         println(" salas")
+        //escritura en el archivo
         archivo.printWriter().use { out ->
             out.println("Ronda de minas moria ganada")
             out.println("Salas superadas: "+numSalas)
@@ -273,17 +292,25 @@ fun main(args: Array<String>) {
 
 
         }
-    } else{
+        archivo.printWriter().close()
+        //ciere del escritor
+    }
+    //final malo
+    else{
         print("Ha fracasado en intentar superar las minas de Moria aunque ha superado un total de ")
         print(numSalas)
         print ( " y ha fracasado ")
         println( 36 - numSalas)
+        //escritura en el archivo
         archivo.printWriter().use { out ->
             out.println("Ronda de minas moria perdida")
             out.println("Salas superadas: "+numSalas)
             out.println("Fecha de inicio: "+fechainicial)
             out.println("Fecha de finalización: "+fechafinal)
+
         }
+        archivo.printWriter().close()
+        //ciere del escritor
     }
 
 
