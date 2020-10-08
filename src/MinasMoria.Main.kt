@@ -1,10 +1,12 @@
 import java.io.File
 import java.lang.Exception
-import kotlin.jvm.internal.MagicApiIntrinsics
-import java.util.Random
+import java.util.*
+import java.time.LocalDateTime
+
 
 // Creado por Jorge Prieto Medina
 fun main(args: Array<String>) {
+    val archivo = File("moria.txt")
     var numaleatorio = Random()
     var enemigos: Int = 0
     var probabilidad: Int = 0
@@ -17,6 +19,10 @@ fun main(args: Array<String>) {
     var hobbit = Hobbit (nombre = "Frodo", estado = true, anillo = false)
     var elfo = Elfo (nombre = "Légolas", estado = true, carcaj = 0)
     var mago = Mago (nombre = "Gándalf", estado = true, energíatotal = 0)
+
+    if (!archivo.exists()){
+        archivo.createNewFile()
+    }
 
     println("Bienvenido a Minas Moria")
     do {
@@ -47,6 +53,7 @@ fun main(args: Array<String>) {
 
 
     println("Comenzando simulación")
+    val fechainicial = LocalDateTime.now()
     do{
         print("Bienvenido a la sala numero: ")
         println(numSalas+1)
@@ -252,17 +259,37 @@ fun main(args: Array<String>) {
 
     }while(hobbit.estado && elfo.estado && mago.estado && numSalas < 36)
 
+    val fechafinal = LocalDateTime.now()
+
     if(hobbit.estado && elfo.estado && mago.estado){
         print("Felicidades ha conseguido superar las minas de Moria ha ganado superando un total de ")
         print(numSalas)
         println(" salas")
+        archivo.printWriter().use { out ->
+            out.println("Ronda de minas moria ganada")
+            out.println("Salas superadas: "+numSalas)
+            out.println("Fecha de inicio: "+fechainicial)
+            out.println("Fecha de finalización: "+fechafinal)
 
+
+        }
     } else{
         print("Ha fracasado en intentar superar las minas de Moria aunque ha superado un total de ")
         print(numSalas)
         print ( " y ha fracasado ")
         println( 36 - numSalas)
+        archivo.printWriter().use { out ->
+            out.println("Ronda de minas moria perdida")
+            out.println("Salas superadas: "+numSalas)
+            out.println("Fecha de inicio: "+fechainicial)
+            out.println("Fecha de finalización: "+fechafinal)
+        }
     }
+
+
+
+
+
 
 
 }
